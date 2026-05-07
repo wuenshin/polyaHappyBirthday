@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Моменты</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#f6f0e8;
+      color:#2e2e2e;
+      font-family:'Montserrat',sans-serif;
+      overflow-x:hidden;
+    }
+
+    .hero{
+      width:100%;
+      height:75vh;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      z-index:1;
+    }
+
+    .hero img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .hero-content{
+      position:absolute;
+      z-index:2;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      text-align:center;
+      color:white;
+      width:90%;
+    }
+
+    .hero-content h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:76px;
+      font-weight:500;
+      margin-bottom:20px;
+    }
+
+    .hero-content p{
+      font-size:18px;
+      line-height:1.8;
+      max-width:700px;
+      margin:0 auto;
+    }
+
+    .timeline{
+      max-width:1100px;
+      margin:120px auto;
+      padding:0 20px;
+      position:relative;
+    }
+
+    .timeline::before{
+      content:'';
+      position:absolute;
+      left:50%;
+      top:0;
+      width:2px;
+      height:100%;
+      background:#d9c5af;
+      transform:translateX(-50%);
+    }
+
+    .moment{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:140px;
+      position:relative;
+    }
+
+    .moment:nth-child(even){
+      flex-direction:row-reverse;
+    }
+
+    .text-box{
+      width:46%;
+      background:rgba(255,255,255,0.6);
+      backdrop-filter:blur(12px);
+      padding:40px;
+      border-radius:30px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.06);
+    }
+
+    .text-box h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:48px;
+      margin-bottom:20px;
+      font-weight:500;
+    }
+
+    .text-box p{
+      line-height:2;
+      color:#555;
+      font-size:15px;
+    }
+
+    .image-box{
+      width:46%;
+    }
+
+    .image-box img{
+      width:100%;
+      border-radius:30px;
+      object-fit:cover;
+      box-shadow:0 18px 50px rgba(0,0,0,0.12);
+    }
+
+    .dot{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      width:22px;
+      height:22px;
+      background:#c9a989;
+      border-radius:50%;
+      border:5px solid #f6f0e8;
+      z-index:5;
+    }
+
+    .quote-section{
+      max-width:900px;
+      margin:0 auto 140px;
+      text-align:center;
+      padding:0 20px;
+    }
+
+    .quote-section h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:64px;
+      font-weight:500;
+      margin-bottom:35px;
+      line-height:1.2;
+    }
+
+    .quote-section p{
+      font-size:18px;
+      line-height:2;
+      color:#666;
+    }
+
+    .next-page{
+      text-align:center;
+      padding-bottom:100px;
+    }
+
+    .next-page a{
+      text-decoration:none;
+      color:white;
+      background:#2d2d2d;
+      padding:18px 42px;
+      border-radius:50px;
+      transition:0.4s;
+      display:inline-block;
+    }
+
+    .next-page a:hover{
+      transform:translateY(-4px);
+      opacity:0.92;
+    }
+
+    @media(max-width:900px){
+
+      .timeline::before{
+        display:none;
+      }
+
+      .moment,
+      .moment:nth-child(even){
+        flex-direction:column;
+        gap:30px;
+      }
+
+      .text-box,
+      .image-box{
+        width:100%;
+      }
+
+      .dot{
+        display:none;
+      }
+
+      .hero-content h1{
+        font-size:50px;
+      }
+
+      .quote-section h2{
+        font-size:42px;
+      }
+
+    }
+.music-button{
+
+  position:fixed;
+
+  right:22px;
+
+  bottom:22px;
+
+  width:52px;
+
+  height:52px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.12);
+
+  backdrop-filter:blur(14px);
+
+  color:white;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  z-index:9999;
+
+  transition:0.4s;
+
+  border:1px solid rgba(255,255,255,0.12);
+
+}
+
+.music-button:hover{
+
+  transform:scale(1.08);
+
+  background:rgba(255,255,255,0.22);
+
+}
+  </style>
+</head>
+
+<body>
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-button" onclick="toggleMusic()">
+  ♪
+</button>
+  <section class="hero">
+
+    <img src="moments-hero.jpg" alt="">
+
+    <div class="hero-content">
+
+      <h1>Моменты</h1>
+
+      <p>
+        Все эти вечера, прогулки, закаты и объятия —
+        часть нашей истории, которую мы пишем вместе.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="timeline">
+
+    <div class="moment">
+
+      <div class="text-box">
+
+        <h2>Летние закаты</h2>
+
+        <p>
+          Я всегда буду помнить наши летние вечера у моря.
+          Как мы лежали рядом,
+          смотрели на закат
+          и будто забывали обо всём вокруг.
+        </p>
+
+      </div>
+
+      <div class="image-box">
+        <img src="sunset-memory.jpg" alt="">
+      </div>
+
+      <div class="dot"></div>
+
+    </div>
+
+    <div class="moment">
+
+      <div class="text-box">
+
+        <h2>Каток 😅</h2>
+
+        <p>
+          Полина очень уговаривала меня сходить на каток
+          и говорила, что отлично катается.
+        </p>
+
+        <p>
+          А я честно сказал,
+          что стоял на коньках всего раз 5 в жизни.
+        </p>
+
+        <p>
+          Но именно такие моменты
+          почему-то становятся самыми тёплыми воспоминаниями.
+        </p>
+
+      </div>
+
+      <div class="image-box">
+        <img src="ice-skating.jpg" alt="">
+      </div>
+
+      <div class="dot"></div>
+
+    </div>
+
+    <div class="moment">
+
+      <div class="text-box">
+
+        <h2>Камень у моря</h2>
+
+        <p>
+          Как-то раз мы были на море,
+          и я вместо того,
+          чтобы красиво вынырнуть возле Поли —
+          ударился головой об камень 😭
+        </p>
+
+        <p>
+          Потом ходил с шишкой ещё недели три.
+          Но сейчас это один из самых любимых и смешных моментов.
+        </p>
+
+      </div>
+
+      <div class="image-box">
+        <img src="sea-memory.jpg" alt="">
+      </div>
+
+      <div class="dot"></div>
+
+    </div>
+
+    <div class="moment">
+
+      <div class="text-box">
+
+        <h2>Ромашки</h2>
+
+        <p>
+          1 июня 2025 мы поехали к водопаду Козырёк.
+        </p>
+
+        <p>
+          А под конец прогулки
+          я нарвал тебе букет полевых ромашек.
+        </p>
+
+        <p>
+          Иногда самые простые моменты
+          становятся самыми важными.
+        </p>
+
+      </div>
+
+      <div class="image-box">
+        <img src="flowers-memory.jpg" alt="">
+      </div>
+
+      <div class="dot"></div>
+
+    </div>
+
+  </section>
+
+  <section class="quote-section">
+
+    <h2>
+      «Каждый момент с тобой —
+      уже любимое воспоминание»
+    </h2>
+
+    <p>
+      Даже если это просто прогулка вечером,
+      закат у моря
+      или твои тёплые объятия со спины.
+    </p>
+
+  </section>
+
+  <div class="next-page">
+
+    <a href="gallery.html">
+      Дальше →
+    </a>
+
+  </div>
+<script>
+
+  const music = document.getElementById('bgMusic');
+
+  music.volume = 0.45;
+
+  const savedTime = localStorage.getItem('musicTime');
+
+  if(savedTime){
+
+    music.currentTime = savedTime;
+
+  }
+
+  const wasPlaying = localStorage.getItem('musicPlaying');
+
+  if(wasPlaying === 'true'){
+
+    function resumeMusic(){
+
+      music.play();
+
+      document.removeEventListener('click', resumeMusic);
+      document.removeEventListener('touchstart', resumeMusic);
+
+    }
+
+    document.addEventListener('click', resumeMusic);
+
+    document.addEventListener('touchstart', resumeMusic);
+
+  }
+
+  function toggleMusic(){
+
+    if(music.paused){
+
+      music.play();
+
+      localStorage.setItem('musicPlaying', 'true');
+
+    } else {
+
+      music.pause();
+
+      localStorage.setItem('musicPlaying', 'false');
+
+    }
+
+  }
+
+  setInterval(() => {
+
+    localStorage.setItem('musicTime', music.currentTime);
+
+  }, 500);
+
+</script>
+</body>
+</html>

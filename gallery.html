@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Наша плёнка</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#f4eee7;
+      color:#2f2f2f;
+      font-family:'Montserrat',sans-serif;
+      overflow-x:hidden;
+    }
+
+    .hero{
+      padding:120px 20px 70px;
+      text-align:center;
+      position:relative;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:-120px;
+      left:-120px;
+      width:350px;
+      height:350px;
+      background:#ecd6c3;
+      border-radius:50%;
+      filter:blur(120px);
+      opacity:0.5;
+    }
+
+    .hero h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:76px;
+      font-weight:500;
+      margin-bottom:20px;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:0 auto;
+      line-height:2;
+      color:#676767;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gallery{
+      max-width:1400px;
+      margin:0 auto 120px;
+      padding:0 25px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:50px 35px;
+    }
+
+    .polaroid{
+      background:white;
+      padding:18px 18px 30px;
+      border-radius:8px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.08);
+      transition:0.45s;
+      transform:rotate(calc(var(--r) * 1deg));
+      position:relative;
+    }
+
+    .polaroid:hover{
+      transform:translateY(-10px) scale(1.02) rotate(0deg);
+    }
+
+    .polaroid img{
+      width:100%;
+      height:360px;
+      object-fit:cover;
+      border-radius:4px;
+      margin-bottom:18px;
+    }
+
+    .caption{
+      text-align:center;
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px;
+      line-height:1.4;
+      color:#3a3a3a;
+    }
+
+    .quote-section{
+      max-width:900px;
+      margin:0 auto 140px;
+      padding:0 20px;
+      text-align:center;
+    }
+
+    .quote-section h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:62px;
+      line-height:1.3;
+      font-weight:500;
+      margin-bottom:30px;
+    }
+
+    .quote-section p{
+      color:#666;
+      line-height:2;
+      font-size:17px;
+    }
+
+    .next-page{
+      text-align:center;
+      padding-bottom:110px;
+    }
+
+    .next-page a{
+      display:inline-block;
+      text-decoration:none;
+      background:#2d2d2d;
+      color:white;
+      padding:18px 42px;
+      border-radius:50px;
+      transition:0.4s;
+    }
+
+    .next-page a:hover{
+      transform:translateY(-4px);
+      opacity:0.92;
+    }
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:50px;
+      }
+
+      .quote-section h2{
+        font-size:40px;
+      }
+
+      .polaroid img{
+        height:300px;
+      }
+
+    }
+.music-button{
+
+  position:fixed;
+
+  right:22px;
+
+  bottom:22px;
+
+  width:52px;
+
+  height:52px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.12);
+
+  backdrop-filter:blur(14px);
+
+  color:white;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  z-index:9999;
+
+  transition:0.4s;
+
+  border:1px solid rgba(255,255,255,0.12);
+
+}
+
+.music-button:hover{
+
+  transform:scale(1.08);
+
+  background:rgba(255,255,255,0.22);
+
+}
+  </style>
+</head>
+
+<body>
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-button" onclick="toggleMusic()">
+  ♪
+</button>
+  <section class="hero">
+
+    <h1>Наша плёнка</h1>
+
+    <p>
+      Я люблю фотографии,
+      потому что они умеют сохранять чувства.
+      <br><br>
+      И почти каждая фотография с тобой —
+      автоматически становится моей любимой.
+    </p>
+
+  </section>
+
+  <section class="gallery">
+
+    <div class="polaroid" style="--r:-4">
+      <img src="gallery-1.jpg" alt="">
+      <div class="caption">
+        «Ты — моё любимое место»
+      </div>
+    </div>
+
+    <div class="polaroid" style="--r:3">
+      <img src="gallery-2.jpg" alt="">
+      <div class="caption">
+        «Твои объятия — мой дом»
+      </div>
+    </div>
+
+    <div class="polaroid" style="--r:-2">
+      <img src="gallery-3.jpg" alt="">
+      <div class="caption">
+        «Каждый закат с тобой становится красивее»
+      </div>
+    </div>
+
+    <div class="polaroid" style="--r:5">
+      <img src="gallery-4.jpg" alt="">
+      <div class="caption">
+        «Ты смотришь — и внутри всё тает»
+      </div>
+    </div>
+
+    <div class="polaroid" style="--r:-3">
+      <img src="gallery-5.jpg" alt="">
+      <div class="caption">
+        «Я бы пережил все эти моменты ещё тысячу раз»
+      </div>
+    </div>
+
+    <div class="polaroid" style="--r:2">
+      <img src="gallery-6.jpg" alt="">
+      <div class="caption">
+        «Люблю тебя в каждом моменте»
+      </div>
+    </div>
+
+  </section>
+
+  <section class="quote-section">
+
+    <h2>
+      «Все наши вечера и прогулки —
+      часть истории,
+      которую мы пишем вместе»
+    </h2>
+
+    <p>
+      И я очень надеюсь,
+      что впереди у нас ещё огромное количество моментов,
+      которые однажды тоже станут воспоминаниями ❤️
+    </p>
+
+  </section>
+
+  <div class="next-page">
+
+    <a href="letter.html">
+      Дальше →
+    </a>
+
+  </div>
+<script>
+
+  const music = document.getElementById('bgMusic');
+
+  music.volume = 0.45;
+
+  const savedTime = localStorage.getItem('musicTime');
+
+  if(savedTime){
+
+    music.currentTime = savedTime;
+
+  }
+
+  const wasPlaying = localStorage.getItem('musicPlaying');
+
+  if(wasPlaying === 'true'){
+
+    function resumeMusic(){
+
+      music.play();
+
+      document.removeEventListener('click', resumeMusic);
+      document.removeEventListener('touchstart', resumeMusic);
+
+    }
+
+    document.addEventListener('click', resumeMusic);
+
+    document.addEventListener('touchstart', resumeMusic);
+
+  }
+
+  function toggleMusic(){
+
+    if(music.paused){
+
+      music.play();
+
+      localStorage.setItem('musicPlaying', 'true');
+
+    } else {
+
+      music.pause();
+
+      localStorage.setItem('musicPlaying', 'false');
+
+    }
+
+  }
+
+  setInterval(() => {
+
+    localStorage.setItem('musicTime', music.currentTime);
+
+  }, 500);
+
+</script>
+</body>
+</html>
