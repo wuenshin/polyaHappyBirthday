@@ -400,34 +400,62 @@
 
   <script>
 
-    function updateTimer(id, startDate){
+  <script>
 
-      const now = new Date();
-      const start = new Date(startDate);
+function updateLiveTimer(id, startDate){
 
-      let years = now.getFullYear() - start.getFullYear();
-      let months = now.getMonth() - start.getMonth();
-      let days = now.getDate() - start.getDate();
+    function update(){
 
-      if(days < 0){
-        months--;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
+        const start = new Date(startDate);
 
-      if(months < 0){
-        years--;
-        months += 12;
-      }
+        const now = new Date();
 
-      document.getElementById(id).innerHTML =
-        `${years} год<br>${months} месяцев<br>${days} дней`;
+        let diff = now - start;
+
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+
+        diff -= years * (1000 * 60 * 60 * 24 * 365);
+
+        const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+
+        diff -= months * (1000 * 60 * 60 * 24 * 30);
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        diff -= days * (1000 * 60 * 60 * 24);
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+
+        diff -= hours * (1000 * 60 * 60);
+
+        const minutes = Math.floor(diff / (1000 * 60));
+
+        diff -= minutes * (1000 * 60);
+
+        const seconds = Math.floor(diff / 1000);
+
+        document.getElementById(id).innerHTML = `
+            ${years} лет<br>
+            ${months} месяцев<br>
+            ${days} дней<br>
+            ${hours} часов<br>
+            ${minutes} минут<br>
+            ${seconds} секунд
+        `;
 
     }
 
-    updateTimer("datingTimer", "2025-01-13");
-    updateTimer("loveTimer", "2025-02-10");
+    update();
 
+    setInterval(update,1000);
+
+}
+
+updateLiveTimer("datingTimer", "2025-01-13T00:00:00");
+
+updateLiveTimer("loveTimer", "2025-02-10T00:00:00");
+
+</script>
 
   const music = document.getElementById('bgMusic');
 
