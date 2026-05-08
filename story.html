@@ -398,9 +398,7 @@
 
   </section>
 
-  <script>
-
-  <script>
+ <script>
 
 function updateLiveTimer(id, startDate){
 
@@ -435,7 +433,7 @@ function updateLiveTimer(id, startDate){
         const seconds = Math.floor(diff / 1000);
 
         document.getElementById(id).innerHTML = `
-            ${years} лет<br>
+            ${years} год<br>
             ${months} месяцев<br>
             ${days} дней<br>
             ${hours} часов<br>
@@ -451,34 +449,32 @@ function updateLiveTimer(id, startDate){
 
 }
 
-updateLiveTimer("datingTimer", "2025-01-13T00:00:00");
+updateLiveTimer("datingTimer", "2025-01-13T16:47:00");
 
 updateLiveTimer("loveTimer", "2025-02-10T00:00:00");
 
-</script>
+const music = document.getElementById('bgMusic');
 
-  const music = document.getElementById('bgMusic');
+music.volume = 0.45;
 
-  music.volume = 0.45;
+const savedTime = localStorage.getItem('musicTime');
 
-  const savedTime = localStorage.getItem('musicTime');
-
-  if(savedTime){
+if(savedTime){
 
     music.currentTime = savedTime;
 
-  }
+}
 
-  const wasPlaying = localStorage.getItem('musicPlaying');
+const wasPlaying = localStorage.getItem('musicPlaying');
 
-  if(wasPlaying === 'true'){
+if(wasPlaying === 'true'){
 
     function resumeMusic(){
 
-      music.play();
+        music.play();
 
-      document.removeEventListener('click', resumeMusic);
-      document.removeEventListener('touchstart', resumeMusic);
+        document.removeEventListener('click', resumeMusic);
+        document.removeEventListener('touchstart', resumeMusic);
 
     }
 
@@ -486,31 +482,31 @@ updateLiveTimer("loveTimer", "2025-02-10T00:00:00");
 
     document.addEventListener('touchstart', resumeMusic);
 
-  }
+}
 
-  function toggleMusic(){
+function toggleMusic(){
 
     if(music.paused){
 
-      music.play();
+        music.play();
 
-      localStorage.setItem('musicPlaying', 'true');
+        localStorage.setItem('musicPlaying', 'true');
 
     } else {
 
-      music.pause();
+        music.pause();
 
-      localStorage.setItem('musicPlaying', 'false');
+        localStorage.setItem('musicPlaying', 'false');
 
     }
 
-  }
+}
 
-  setInterval(() => {
+setInterval(() => {
 
     localStorage.setItem('musicTime', music.currentTime);
 
-  }, 500);
+}, 500);
 
 </script>
 
